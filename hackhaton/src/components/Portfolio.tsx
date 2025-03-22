@@ -1,7 +1,7 @@
 import { useAccount } from 'wagmi'
 import { useQuery } from '@apollo/client'
 import { GET_TOKEN_BALANCES, GET_FULL_PORTFOLIO } from '../graphql/queries'
-import { TokenBalancesData, FullPortfolioData } from '../services/zapper'
+import { TokenBalancesData, FullPortfolioData } from '../graphql/types'
 
 
 export function Portfolio() {
@@ -9,7 +9,11 @@ export function Portfolio() {
 
   const { data: tokenData, loading: tokenLoading } = useQuery<TokenBalancesData>(
     GET_TOKEN_BALANCES,
+
     {
+      context: {
+        clientName: 'zapper'
+      },
       variables: {
         addresses: [address],
         first: 10
@@ -17,10 +21,14 @@ export function Portfolio() {
       skip: !address
     }
   )
+  console.log('tokenData', tokenData)
 
   const { data: portfolioData, loading: portfolioLoading } = useQuery<FullPortfolioData>(
     GET_FULL_PORTFOLIO,
     {
+      context: {
+        clientName: 'zapper'
+      },
       variables: {
         addresses: [address]
       },

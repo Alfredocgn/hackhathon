@@ -1,5 +1,7 @@
 import { gql } from '@apollo/client'
 
+
+//ZAPPER QUERIES
 export const GET_TOKEN_BALANCES = gql`
   query TokenBalances($addresses: [Address!]!, $first: Int) {
     portfolioV2(addresses: $addresses) {
@@ -63,3 +65,25 @@ export const GET_FULL_PORTFOLIO = gql`
     }
   }
 `
+
+
+//BITQUERY QUERIES
+export const GET_SMART_CONTRACTS = gql`
+  query GetSmartContracts($network: String!, $limit: Int = 100) {
+    ethereum(network: $network) {
+      smartContractCalls(
+        options: { limit: $limit }
+      ) {
+        smartContract {
+          address {
+            address
+          }
+          protocolType
+          callers: callersCount
+          calls: callsCount
+        }
+        transactions: count
+      }
+    }
+  }
+`;

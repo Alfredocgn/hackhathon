@@ -1,4 +1,3 @@
-
 import './App.css'
 import { useAccount, useConnect, useDisconnect, useEnsAvatar, useEnsName } from 'wagmi'
 import { Portfolio } from './components/Portfolio'
@@ -9,8 +8,6 @@ export function Account() {
   const { data: ensName } = useEnsName({ address })
   const { data: ensAvatar } = useEnsAvatar({ name: ensName! })
 
-
-
   return (
     <div className='flex flex-col gap-4 items-center justify-center'>
       {ensAvatar && <img alt="ENS Avatar" src={ensAvatar} />}
@@ -20,10 +17,9 @@ export function Account() {
     </div>
   )
 }
+
 export function WalletOptions() {
   const { connectors, connect } = useConnect()
-
-  
 
   return connectors.map((connector) => (
     <button className='bg-gray-100 p-2 rounded-md w-[10rem]'  key={connector.uid} onClick={() => connect({ connector })}>
@@ -32,14 +28,7 @@ export function WalletOptions() {
   ))
 }
 
-export function Profile() {
-  
-  // const { data, error, status } = useEnsName({ address })
-  // if (status === 'pending') return <div>Loading ENS name</div>
-  // if (status === 'error')
-  //   return <div>Error fetching ENS name: {error.message}</div>
-  // return <div>ENS name: {data}</div>
-}
+
 
 export default function App() {
   return (

@@ -7,7 +7,7 @@ import { WagmiProvider } from 'wagmi'
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import config from './services/config.ts'
-import { apolloClient } from './services/apollo.ts'
+import {  apolloClient,  } from './services/apollo.ts'
 import { ApolloProvider } from '@apollo/client'
 const queryClient = new QueryClient()
 
@@ -21,8 +21,10 @@ createRoot(document.getElementById('root')!).render(
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
       <ApolloProvider client={apolloClient}>
-        <App />
-      </ApolloProvider>
+
+            <App />
+
+        </ApolloProvider>
       </QueryClientProvider>
     </WagmiProvider>
   </StrictMode>,
