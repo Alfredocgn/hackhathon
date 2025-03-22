@@ -1,12 +1,7 @@
 
 import './App.css'
-
-
-
 import { useAccount, useConnect, useDisconnect, useEnsAvatar, useEnsName } from 'wagmi'
 import { Portfolio } from './components/Portfolio'
-
-
 
 export function Account() {
   const { address, chain } = useAccount()
@@ -28,7 +23,7 @@ export function Account() {
 export function WalletOptions() {
   const { connectors, connect } = useConnect()
 
-
+  
 
   return connectors.map((connector) => (
     <button key={connector.uid} onClick={() => connect({ connector })}>
@@ -37,7 +32,16 @@ export function WalletOptions() {
   ))
 }
 
-
+export function Profile() {
+  const data = useAccount()
+  console.log(data)
+  
+  // const { data, error, status } = useEnsName({ address })
+  // if (status === 'pending') return <div>Loading ENS name</div>
+  // if (status === 'error')
+  //   return <div>Error fetching ENS name: {error.message}</div>
+  // return <div>ENS name: {data}</div>
+}
 
 export default function App() {
   return (
