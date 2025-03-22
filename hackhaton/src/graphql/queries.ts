@@ -68,21 +68,31 @@ export const GET_FULL_PORTFOLIO = gql`
 
 
 //BITQUERY QUERIES
-export const GET_SMART_CONTRACTS = gql`
-  query GetSmartContracts($network: String!, $limit: Int = 100) {
+export const GET_DEX_TRADES = gql`
+  query GetDexTrades($network: EthereumNetwork!, $limit: Int = 100, $from: ISO8601DateTime) {
     ethereum(network: $network) {
-      smartContractCalls(
-        options: { limit: $limit }
+      dexTrades(
+        options: {limit: $limit, desc: "tradeAmount"}
+        date: {after: $from}
       ) {
-        smartContract {
+        exchange {
+          fullName
           address {
             address
+            annotation
           }
-          protocolType
-          callers: callersCount
-          calls: callsCount
         }
-        transactions: count
+        protocol
+        tradeAmount(in: USD)
+        trades: count
+        buyCurrency {
+          symbol
+          name
+        }
+        sellCurrency {
+          symbol
+          name
+        }
       }
     }
   }

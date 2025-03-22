@@ -57,3 +57,19 @@ export interface FullPortfolioData {
   }
 }
 
+
+
+export interface SmartContractData {
+  address: string;
+  protocol: string;
+  chain: string;
+  smartContractCalls: number;
+  transactionCount: number;
+}
+
+export const SUPPORTED_NETWORKS = [
+  { id: 'ethereum', name: 'Ethereum' },
+  { id: 'bsc', name: 'BSC' },
+  { id: 'matic', name: 'Polygon' },
+  { id: 'arbitrum', name: 'Arbitrum' },
+] as const;

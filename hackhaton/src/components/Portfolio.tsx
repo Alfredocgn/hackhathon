@@ -21,7 +21,7 @@ export function Portfolio() {
       skip: !address
     }
   )
-  console.log('tokenData', tokenData)
+
 
   const { data: portfolioData, loading: portfolioLoading } = useQuery<FullPortfolioData>(
     GET_FULL_PORTFOLIO,

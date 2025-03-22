@@ -27,7 +27,8 @@ const bitqueryHttpLink = createHttpLink({
 const bitqueryAuthLink = setContext((_, { headers }) => ({
   headers: {
     ...headers,
-    'X-API-KEY': BITQUERY_API_KEY,
+    authorization: `Bearer ${BITQUERY_API_KEY}`,
+
   }
 }))
 
