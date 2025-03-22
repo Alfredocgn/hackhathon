@@ -12,11 +12,11 @@ export function Account() {
 
 
   return (
-    <div>
+    <div className='flex flex-col gap-4 items-center justify-center'>
       {ensAvatar && <img alt="ENS Avatar" src={ensAvatar} />}
-      {address && <div>{ensName ? ensName + " (" + address + ")" : address}</div>}
-      <p>{chain?.name}</p>
-      <button onClick={() => disconnect()}>Disconnect</button>
+      {address && <div className='text-lg font-bold'>Wallet Address: {ensName ? ensName + " (" + address + ")" : address}</div>}
+      <p className='text-lg font-bold'>Chain: {chain?.name}</p>
+      <button className='bg-gray-100 p-2 rounded-md w-[10rem]' onClick={() => disconnect()}>Disconnect</button>
     </div>
   )
 }
@@ -26,15 +26,13 @@ export function WalletOptions() {
   
 
   return connectors.map((connector) => (
-    <button key={connector.uid} onClick={() => connect({ connector })}>
+    <button className='bg-gray-100 p-2 rounded-md w-[10rem]'  key={connector.uid} onClick={() => connect({ connector })}>
       {connector.name}
     </button>
   ))
 }
 
 export function Profile() {
-  const data = useAccount()
-  console.log(data)
   
   // const { data, error, status } = useEnsName({ address })
   // if (status === 'pending') return <div>Loading ENS name</div>
@@ -45,10 +43,10 @@ export function Profile() {
 
 export default function App() {
   return (
-    <>
+    <div className='flex flex-col gap-6 items-center justify-center'>
     <WalletOptions />
     <Account />
     <Portfolio />
-    </>
+    </div>
   )
 }
